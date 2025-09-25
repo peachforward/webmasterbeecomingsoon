@@ -53,13 +53,6 @@ export default function Page() {
           </div>
         </header>
 
-        <Badge
-          variant="secondary"
-          className="hidden md:flex items-center space-x-2"
-        >
-          <div className="w-2 h-2 bg-accent rounded-full animate-pulse" />
-          <span>Coming Soon</span>
-        </Badge>
       </header>
 
       {/* Main Content */}
@@ -86,7 +79,7 @@ export default function Page() {
       {/* Footer */}
       <footer className="relative z-10 p-6 md:p-8 text-center">
         <p className="text-sm text-muted-foreground">
-          © 2025 Nexus. Building the future, one innovation at a time.
+          © 2025 Webmasterbee. Building the future, one innovation at a time.
         </p>
       </footer>
     </div>
