@@ -1,102 +1,168 @@
+"use client";
+
+import type React from "react";
+
+import { useState } from "react";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Card } from "@/components/ui/card";
+import { Badge } from "@/components/ui/badge";
+import {
+  ArrowRight,
+  Mail,
+  Bell,
+  Sparkles,
+  Zap,
+  Globe,
+  Users,
+} from "lucide-react";
 import Image from "next/image";
 
-export default function Home() {
-  return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+export function ComingSoonPage() {
+  const [email, setEmail] = useState("");
+  const [isSubscribed, setIsSubscribed] = useState(false);
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (email) {
+      setIsSubscribed(true);
+      setEmail("");
+    }
+  };
+
+  return (
+    <div className="min-h-screen bg-background relative overflow-hidden">
+      {/* Grid Pattern Background */}
+      <div className="absolute inset-0 grid-pattern opacity-50" />
+
+      {/* Gradient Overlay */}
+      <div className="absolute inset-0 bg-gradient-to-br from-accent/5 via-transparent to-primary/5" />
+
+      {/* Header */}
+      <header className="relative z-10 flex items-center justify-between p-6 md:p-8">
+        <header className="w-full p-6 animate-[fadeIn_0.8s_ease-out_forwards]">
+          <div className="max-w-7xl mx-auto">
             <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
+              src="https://res.cloudinary.com/druohnmyv/image/upload/v1758815196/Screenshot_2025-08-09_at_10.17.00_PM-removebg-preview_hzizkf.png"
+              alt="Logo"
+              width={160}
+              height={48}
+              // className="h-12 w-auto"
+              priority
             />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+          </div>
+        </header>
+
+        <Badge
+          variant="secondary"
+          className="hidden md:flex items-center space-x-2"
+        >
+          <div className="w-2 h-2 bg-accent rounded-full animate-pulse" />
+          <span>Coming Soon</span>
+        </Badge>
+      </header>
+
+      {/* Main Content */}
+      <main className="relative z-10 flex flex-col items-center justify-center min-h-[calc(100vh-200px)] px-6 text-center">
+        <div className="max-w-4xl mx-auto space-y-8">
+          {/* Hero Section */}
+          <div className="space-y-6">
+            <Badge variant="outline" className="mb-4">
+              <Bell className="w-4 h-4 mr-2" />
+              Something amazing is brewing
+            </Badge>
+
+            <h1 className="text-4xl md:text-6xl lg:text-7xl font-bold text-balance leading-tight">
+              The future of
+              <span className="text-accent block mt-2">digital innovation</span>
+              starts here
+            </h1>
+
+            <p className="text-xl md:text-2xl text-muted-foreground text-balance max-w-2xl mx-auto leading-relaxed">
+              We're crafting an extraordinary platform that will revolutionize
+              how teams collaborate, create, and scale their ideas.
+            </p>
+          </div>
+
+          {/* Email Signup */}
+          <div className="max-w-md mx-auto">
+            {!isSubscribed ? (
+              <form
+                onSubmit={handleSubmit}
+                className="flex flex-col sm:flex-row gap-3"
+              >
+                <Input
+                  type="email"
+                  placeholder="Enter your email"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                  className="flex-1 h-12 text-base"
+                  required
+                />
+                <Button type="submit" size="lg" className="h-12 px-8">
+                  Get Early Access
+                  <ArrowRight className="w-4 h-4 ml-2" />
+                </Button>
+              </form>
+            ) : (
+              <Card className="p-6 bg-accent/10 border-accent/20">
+                <div className="flex items-center justify-center space-x-3 text-accent">
+                  <Mail className="w-5 h-5" />
+                  <span className="font-medium">
+                    {"You're on the list! We'll be in touch soon."}
+                  </span>
+                </div>
+              </Card>
+            )}
+
+            <p className="text-sm text-muted-foreground mt-3">
+              Join 10,000+ innovators waiting for launch. No spam, ever.
+            </p>
+          </div>
+
+          {/* Features Preview */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mt-16 max-w-4xl mx-auto">
+            <Card className="p-6 bg-card/50 backdrop-blur-sm border-border/50 hover:bg-card/80 transition-colors">
+              <div className="w-12 h-12 bg-accent/10 rounded-lg flex items-center justify-center mb-4">
+                <Zap className="w-6 h-6 text-accent" />
+              </div>
+              <h3 className="text-lg font-semibold mb-2">Lightning Fast</h3>
+              <p className="text-muted-foreground text-sm">
+                Built for speed with cutting-edge technology that scales with
+                your ambitions.
+              </p>
+            </Card>
+
+            <Card className="p-6 bg-card/50 backdrop-blur-sm border-border/50 hover:bg-card/80 transition-colors">
+              <div className="w-12 h-12 bg-accent/10 rounded-lg flex items-center justify-center mb-4">
+                <Users className="w-6 h-6 text-accent" />
+              </div>
+              <h3 className="text-lg font-semibold mb-2">Team-First</h3>
+              <p className="text-muted-foreground text-sm">
+                Designed for seamless collaboration across teams of any size,
+                anywhere.
+              </p>
+            </Card>
+
+            <Card className="p-6 bg-card/50 backdrop-blur-sm border-border/50 hover:bg-card/80 transition-colors">
+              <div className="w-12 h-12 bg-accent/10 rounded-lg flex items-center justify-center mb-4">
+                <Globe className="w-6 h-6 text-accent" />
+              </div>
+              <h3 className="text-lg font-semibold mb-2">Global Scale</h3>
+              <p className="text-muted-foreground text-sm">
+                Enterprise-ready infrastructure that grows with your success
+                story.
+              </p>
+            </Card>
+          </div>
         </div>
       </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
+
+      {/* Footer */}
+      <footer className="relative z-10 p-6 md:p-8 text-center">
+        <p className="text-sm text-muted-foreground">
+          © 2025 Nexus. Building the future, one innovation at a time.
+        </p>
       </footer>
     </div>
   );
